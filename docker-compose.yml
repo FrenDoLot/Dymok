@@ -1,0 +1,38 @@
+services:
+  backend:
+    build:
+      context: ./backend
+    environment:
+      DATABASE_URL: sqlite:////data/dymok.db
+      AGENT_PROVIDER: ${AGENT_PROVIDER:-openclaw_gateway}
+      OPENCLAW_GATEWAY_URL: ${OPENCLAW_GATEWAY_URL:-ws://host.docker.internal:18789}
+      OPENCLAW_GATEWAY_TOKEN: ${OPENCLAW_GATEWAY_TOKEN:-}
+      OPENCLAW_GATEWAY_PASSWORD: ${OPENCLAW_GATEWAY_PASSWORD:-}
+      OPENCLAW_GATEWAY_CLIENT_MODULE: ${OPENCLAW_GATEWAY_CLIENT_MODULE:-/app/vendor/openclaw/dist/gateway-chat-C7bhNw-W.js}
+      OPENCLAW_AGENT_ID: ${OPENCLAW_AGENT_ID:-main}
+      OPENCLAW_MODEL: ${OPENCLAW_MODEL:-}
+      OPENCLAW_TIMEOUT_SECONDS: ${OPENCLAW_TIMEOUT_SECONDS:-120}
+      OPENCLAW_CIRCUIT_BREAKER_SECONDS: ${OPENCLAW_CIRCUIT_BREAKER_SECONDS:-3600}
+      CHAT_RATE_LIMIT_PER_MINUTE: ${CHAT_RATE_LIMIT_PER_MINUTE:-20}
+      UPLOAD_DIR: /data/uploads
+      MAX_UPLOAD_BYTES: ${MAX_UPLOAD_BYTES:-26214400}
+      CORS_ORIGINS: http://localhost:8080,http://127.0.0.1:8080
+    volumes:
+      - dymok-data:/data
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/api/health', timeout=3)"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+  frontend:
+    build:
+      context: ./frontend
+    depends_on:
+      backend:
+        condition: service_healthy
+    ports:
+      - "8080:80"
+
+volumes:
+  dymok-data:

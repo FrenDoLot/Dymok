@@ -1,0 +1,21 @@
+[Unit]
+Description=Dymok Web backend
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=root
+Group=root
+EnvironmentFile=/etc/dymok-web.env
+WorkingDirectory=/opt/dymok-web/backend
+ExecStart=/opt/dymok-web/backend/.venv/bin/uvicorn app.main:app --host 127.0.0.1 --port 18820 --proxy-headers --forwarded-allow-ips=127.0.0.1
+Restart=on-failure
+RestartSec=5
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=full
+ReadWritePaths=/var/lib/dymok-web /var/log/dymok-web /root/.openclaw
+
+[Install]
+WantedBy=multi-user.target

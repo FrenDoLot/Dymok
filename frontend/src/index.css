@@ -1,0 +1,132 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  color-scheme: light;
+  font-family:
+    Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+:root.dark {
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  min-width: 320px;
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  overflow: hidden;
+}
+
+button,
+textarea,
+input {
+  font: inherit;
+}
+
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.markdown {
+  color: rgb(39 39 42);
+}
+
+.dark .markdown {
+  color: rgb(244 244 245);
+}
+
+.markdown > * + * {
+  margin-top: 0.75rem;
+}
+
+.markdown p,
+.markdown ul,
+.markdown ol,
+.markdown table,
+.markdown pre {
+  margin-bottom: 0;
+}
+
+.markdown ul,
+.markdown ol {
+  padding-left: 1.25rem;
+}
+
+.markdown ul {
+  list-style: disc;
+}
+
+.markdown ol {
+  list-style: decimal;
+}
+
+.markdown a {
+  color: rgb(37 99 235);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.dark .markdown a {
+  color: rgb(147 197 253);
+}
+
+.markdown code {
+  border-radius: 0.375rem;
+  background: rgb(244 244 245);
+  padding: 0.125rem 0.375rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-size: 0.875em;
+}
+
+.dark .markdown code {
+  background: rgb(39 39 42);
+}
+
+.markdown pre {
+  overflow-x: auto;
+  border-radius: 0.75rem;
+  background: rgb(24 24 27);
+  padding: 0.875rem 1rem;
+}
+
+.markdown pre code {
+  display: block;
+  background: transparent;
+  padding: 0;
+  color: rgb(244 244 245);
+}
+
+.markdown table {
+  width: 100%;
+  border-collapse: collapse;
+  overflow: hidden;
+  font-size: 0.875rem;
+}
+
+.markdown th,
+.markdown td {
+  border: 1px solid rgb(228 228 231);
+  padding: 0.5rem 0.625rem;
+  text-align: left;
+  vertical-align: top;
+}
+
+.dark .markdown th,
+.dark .markdown td {
+  border-color: rgb(63 63 70);
+}

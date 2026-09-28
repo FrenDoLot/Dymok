@@ -1,0 +1,12 @@
+DymokMemoryStore/
+phone-alarm-bridge/**/build/
+.tmp/
+tmp/
+**/node_modules/
+**/dist/
+**/.gradle/
+**/.venv/
+**/__pycache__/
+backend/*.db
+frontend/test-results/
+frontend/playwright-report/

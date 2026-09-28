@@ -1,0 +1,10 @@
+.git
+**/__pycache__
+**/.venv
+**/node_modules
+**/dist
+**/test-results
+**/playwright-report
+*.sqlite
+dymok.db
+storage/uploads
